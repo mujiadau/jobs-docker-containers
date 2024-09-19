@@ -15,7 +15,7 @@ jobs:
       image: node:16
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:8081
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       PORT: 8080
@@ -23,7 +23,7 @@ jobs:
       mongodb:
         image: mongo
         ports:
-          - 27017:27017
+          - 8081:8081
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
@@ -33,13 +33,13 @@ jobs:
           echo "Waiting for 10 seconds before checking the port..."
           sleep 10
 
-      - name: Check if port 27017 is open
+      - name: Check if port 8081 is open
         run: |
-          echo "Checking if port 27017 is open..."
-          if nc -zv localhost 27017 2>&1 | grep -q succeeded; then
-            echo "Port 27017 is open."
+          echo "Checking if port 8081 is open..."
+          if nc -zv localhost 8081 2>&1 | grep -q succeeded; then
+            echo "Port 8081 is open."
           else
-            echo "Port 27017 is closed."
+            echo "Port 8081 is closed."
             exit 1
           fi
       - name: Get Code
