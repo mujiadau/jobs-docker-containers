@@ -28,6 +28,11 @@ jobs:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
     steps:
+      - name: Wait for 10 seconds
+        run: |
+          echo "Waiting for 10 seconds before checking the port..."
+          sleep 10
+
       - name: Check if port 27017 is open
         run: |
           echo "Checking if port 27017 is open..."
