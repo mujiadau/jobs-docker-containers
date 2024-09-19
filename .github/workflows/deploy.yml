@@ -28,6 +28,15 @@ jobs:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
     steps:
+      - name: Check if port 27017 is open
+        run: |
+          echo "Checking if port 27017 is open..."
+          if nc -zv localhost 27017 2>&1 | grep -q succeeded; then
+            echo "Port 27017 is open."
+          else
+            echo "Port 27017 is closed."
+            exit 1
+          fi
       - name: Get Code
         uses: actions/checkout@v3
       - name: Cache dependencies
